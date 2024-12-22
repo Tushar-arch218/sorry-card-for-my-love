@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorry Card</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: pink;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Flying hearts animation */
+    @keyframes flyHearts {
+      0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .heart-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart-bg .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      transform: rotate(-45deg);
+      animation: flyHearts 5s infinite ease-in;
+    }
+
+    .heart-bg .heart::before,
+    .heart-bg .heart::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart-bg .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart-bg .heart::after {
+      left: 15px;
+      top: 0;
+    }
+
+    .container {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .letter {
+      width: 300px;
+      height: 200px;
+      background: #ff9a9e;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 1s;
+      z-index: 2;
+    }
+
+    .letter.open {
+      transform: translateY(-300px) rotateX(180deg);
+      opacity: 0;
+    }
+
+    .card {
+      position: absolute;
+      width: 280px;
+      height: 380px;
+      background: linear-gradient(to bottom right, #8fd3f4, #84fab0);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: showCard 1s forwards;
+      animation-delay: 1s;
+      z-index: 1;
+    }
+
+    .card.hidden {
+      display: none;
+    }
+
+    .heart {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: relative;
+      transform: rotate(-45deg);
+      animation: beat 0.8s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -25px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 25px;
+      top: 0;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 16px;
+      text-align: center;
+      color: white;
+    }
+
+    .ending {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+    }
+
+    @keyframes showCard {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-bg">
+    <div class="heart" style="left: 10%; animation-duration: 4s; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 30%; animation-duration: 5s; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 50%; animation-duration: 6s; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 70%; animation-duration: 4.5s; animation-delay: 0.5s;"></div>
+    <div class="heart" style="left: 90%; animation-duration: 5.5s; animation-delay: 1.5s;"></div>
+  </div>
+  <div class="container">
+    <div class="letter" onclick="openLetter()">Count for 5 sec then click on me </div>
+    <div class="card hidden">
+      <div class="heart"></div>
+      <div class="message">Sorry Baccha! Abb maan jaa na yaar ❤️<br>I LOVE YOU Meri Jaan!</div>
+      <div class="ending">HUM TOHRA SE PYAAR KRELI!</div>
+    </div>
+  </div>
+
+  <script>
+    function openLetter() {
+      const letter = document.querySelector('.letter');
+      const card = document.querySelector('.card');
+      letter.classList.add('open');
+      card.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
